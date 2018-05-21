@@ -11,7 +11,7 @@ form{
   border:3px solid #771488;
   border-radius: 4px;
   margin-bottom: 7px;
-  width: 200px;
+  width: 400px;
   color: #500650;
   font-size: 21px;
 }
@@ -47,7 +47,4 @@ form{
 #send.button
 {
   margin-left: 133px;
-}
-tr{
-  align-items: center;
 }

@@ -12,7 +12,6 @@ $conn = new mysqli($servername, $username, $password,$db);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
 
   if (isset($_POST)&&!empty($_POST))
 { //checking not empty
@@ -43,7 +42,7 @@ echo "Connected successfully";
       $errors[5] = "Passwords do not match.";
       echo $errors[5];
     }
-    if (0 === preg_match("/ʌDuplicate.*email.*/i",mysqli_error()))
+    if (0 === preg_match("/ʌDuplicate.*email.*/i",mysqli_error($conn)))
     {
       $errors[4] = "Email has already been used.";
       echo $errors[4];
@@ -65,8 +64,8 @@ echo "Connected successfully";
 
       $query = "INSERT INTO user (User_Name,User_Email,User_Password, User_Salt) VALUES ('$uname','$email','$hash','$unique_salt')";
       $result = mysqli_query($conn,$query);
-      header("Location: ../home.php");
     }
   }
 }
+header("Location: ../home.php");
 ?>
