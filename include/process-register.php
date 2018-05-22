@@ -17,33 +17,30 @@ if ($conn->connect_error) {
 { //checking not empty
   if (empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["password_confirm"]))
   {
-    $_SESSION["empty-fields"] = "Please fill out the forms."
+    $_SESSION["empty-fields"] = "Please fill out the forms.";
   }
   else
   { // check username
     if (0 === preg_match("/\S+/",$_POST["username"]))
     {
-      $_SESSION["empty-field1"] = "Please enter a username."
+      $_SESSION["emptyField1"] = "Please enter a username.";
     }//check password
     if (0 === preg_match("/\S+/",$_POST["password"]))
     {
-      $errors[3] = "Please enter a password.";
-      echo $errors[3];
+      $_SESSION["emptyField3"] = "Please enter a password.";
+
     }//check email
     if (0 === preg_match("/.+@.+\..+/",$_POST["email"]))
     {
-      $errors[4] = "Please enter a proper email";
-      echo $errors[4];
+      $_SESSION["emptyField2"] = "Please enter a proper email";
     }//check passwords matching
     if (0 !== strcmp($_POST["password"], $_POST["password_confirm"]))
     {
-      $errors[5] = "Passwords do not match.";
-      echo $errors[5];
+      $_SESSION["emptyField4"] = "Passwords do not match.";
     }
     if (0 === preg_match("/ʌDuplicate.*email.*/i",mysqli_error($conn)))
     {
-      $errors[4] = "Email has already been used.";
-      echo $errors[4];
+      $_SESSION["emptyField2"] = "Email has already been used.";
     }
     //check no errors occured
     if (0 === count($errors))
@@ -66,4 +63,5 @@ if ($conn->connect_error) {
     }
   }
 }
+header("Location: ../home.php?reg=true");
 ?>
