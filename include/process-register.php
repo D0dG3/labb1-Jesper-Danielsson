@@ -17,15 +17,13 @@ if ($conn->connect_error) {
 { //checking not empty
   if (empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["password_confirm"]))
   {
-    $errors[1]="Please enter proper inputs.";
-    echo $errors[1];
+    $_SESSION["empty-fields"] = "Please fill out the forms."
   }
   else
   { // check username
     if (0 === preg_match("/\S+/",$_POST["username"]))
     {
-      $errors[2] = "Please enter a username.";
-      echo $errors[2];
+      $_SESSION["empty-field1"] = "Please enter a username."
     }//check password
     if (0 === preg_match("/\S+/",$_POST["password"]))
     {
@@ -64,8 +62,8 @@ if ($conn->connect_error) {
 
       $query = "INSERT INTO user (User_Name,User_Email,User_Password, User_Salt) VALUES ('$uname','$email','$hash','$unique_salt')";
       $result = mysqli_query($conn,$query);
+      header("Location: ../home.php");
     }
   }
 }
-header("Location: ../home.php");
 ?>
