@@ -1,6 +1,6 @@
 <?php
 session_start();
-$errors =array();
+
 
 $servername = "localhost";
 $username = "root";
@@ -14,36 +14,29 @@ if ($conn->connect_error) {
 }
 
   if (isset($_POST)&&!empty($_POST))
-{ //checking not empty
-  if (empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["password_confirm"]))
-  {
-    $_SESSION["empty-fields"] = "Please fill out the forms.";
-  }
-  else
-  { // check username
+{ // check username
     if (0 === preg_match("/\S+/",$_POST["username"]))
     {
-      $_SESSION["emptyField1"] = "Please enter a username.";
+      (($errors == "&")? $errors = $errors."uname=1":$errors = $errors."&uname=1");
     }//check password
     if (0 === preg_match("/\S+/",$_POST["password"]))
     {
-      $_SESSION["emptyField3"] = "Please enter a password.";
-
+      (($errors == "&")? $errors =  $errors."password=1": $errors = $errors."&password=1");
     }//check email
     if (0 === preg_match("/.+@.+\..+/",$_POST["email"]))
     {
-      $_SESSION["emptyField2"] = "Please enter a proper email";
+      (($errors == "&")? $errors = $errors."email=1":$errors = $errors."&email=1");
     }//check passwords matching
     if (0 !== strcmp($_POST["password"], $_POST["password_confirm"]))
     {
-      $_SESSION["emptyField4"] = "Passwords do not match.";
+      (($errors == "&")? $errors = $errors."pwdconf=1":$errors = $errors."&pwdconf=1");
     }
-    if (0 === preg_match("/ʌDuplicate.*email.*/i",mysqli_error($conn)))
+    if (0 !== preg_match("/ʌDuplicate.*email.*/i",mysqli_error($conn)))
     {
-      $_SESSION["emptyField2"] = "Email has already been used.";
+      (($errors == "&")? $errors = $errors."userexists=1": $errors = $errors."&userexists=1");
     }
     //check no errors occured
-    if (0 === count($errors))
+    if ($errors == "&")
     {
       $uname = mysqli_real_escape_string($conn,$_POST["username"]);
       $email = mysqli_real_escape_string($conn,$_POST["email"]);
@@ -60,8 +53,8 @@ if ($conn->connect_error) {
       $query = "INSERT INTO user (User_Name,User_Email,User_Password, User_Salt) VALUES ('$uname','$email','$hash','$unique_salt')";
       $result = mysqli_query($conn,$query);
       header("Location: ../home.php");
+    }else{
+      header("Location: ../home.php?reg=1".(($errors=="&")?"":$errors));
     }
   }
-}
-header("Location: ../home.php?reg=true");
 ?>

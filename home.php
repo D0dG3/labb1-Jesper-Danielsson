@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<?php  session_start(); ?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
   </head>
   <body>
     <div name="register/login">
-      <?php if (isset($_SESSION)&&!empty($_SESSION))
+      <?php if (isset($_SESSION["User_ID"])&&!empty($_SESSION["User_ID"]))
       {
         include "comment.php";
         include "wall.php";
@@ -23,6 +23,6 @@
         include "wall.php";
       }
     ?></div>
-    
+
   </body>
 </html>

@@ -29,9 +29,6 @@ $result = $conn->query($sql);
     {
       $_SESSION["User_ID"] = $row['User_ID'];
       $_SESSION['User_Name'] = $row['User_Name'];
-      $_SESSION['User_Email'] = $row['User_Email'];
-      $_SESSION['User_Password'] = $row['User_Password'];
-      $_SESSION['User_Salt'] = $row['User_Salt'];
     }
   }
   else

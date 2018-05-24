@@ -1,61 +1,43 @@
-<?php session_start();?>
-<form name="register" onsubmit="return validate_Form_Register()" action="include/process-register.php" method="POST">
+ <form name="register" onsubmit="return validate_Form_Register()" action="include/process-register.php" method="POST">
   <table>
-    <tr>
-      <th><label for="username">Username</label></th>
-      <td>
-        <input type="text" name="username" >
+    <tbody>
+      <tr>
+          <td><label for="username">Username</label></td>
+          <td><input type="text" name="username"></td>
+      </tr>
+      <tr colspan="2" style=<?php echo ((isset($_GET["uname"])&&!empty($_GET["uname"]))? "display:inline":"display:none"); ?> >
+        <td >Please fill out username</td>
+        <?php //echo ((isset($_GET["generalError"])&&!empty($_GET["generalError"]))? "Please fill out form":"") ?>
+      </tr>
         <tr>
-         <?php
-        if (isset($_SESSION["emptyField1"]))
-        {
-          echo $_SESSION["emptyField1"];
-          unset($_SESSION["emptyField1"]);
-        }?> </tr>
-      </td>
-    </tr>
-    <tr>
-      <th><label for="email">Email</label></th>
-      <td>
-        <input type="text" name="email">
-        <tr>
-         <?php
-        if (isset($_SESSION["emptyField2"]))
-        {
-          echo $_SESSION["emptyField2"];
-          unset($_SESSION["emptyField2"]);
-        }?> </tr>
-      </td>
-    </tr>
-    <tr>
-      <th><label for="password">Password</label></th>
-      <td>
-        <input type="password" name="password">
-        <tr>
-         <?php
-        if (isset($_SESSION["emptyField3"]))
-        {
-          echo $_SESSION["emptyField3"];
-          unset($_SESSION["emptyField3"]);
-        }?> </tr>
-      </td>
-    </tr>
-    <tr>
-      <th><label for="password_confirm">Password</label></th>
-      <td>
-        <input type="password" name="password_confirm">
-        <tr>
-         <?php
-        if (isset($_SESSION["emptyField4"]))
-        {
-          echo $_SESSION["emptyField4"];
-          unset($_SESSION["emptyField4"]);
-        }?> </tr>
-      </td>
-    </tr>
-    <tr>
-      <a href="home.php">Back to login</a>
-      <input type="submit" name="register" value="Registrera" class="button">
-    </tr>
-  </table>
+          <th><label for="email">Email</label></th>
+            <td class="errormessage">
+              <input type="text" name="email">
+              <?php echo ((isset($_GET["email"])&&!empty($_GET["email"]))? "Please fill out email":"") ?>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="password">Password</label></th>
+            <tr>
+              <td class="errormessage">
+                <input type="password" name="password">
+                <?php echo ((isset($_GET["password"])&&!empty($_GET["password"]))? "Please fill out password":"") ?>
+              </td>
+            </tr>
+            <tr>
+              <th><label for="password_confirm">Password</label></th>
+              <tr>
+                <td class="errormessage">
+                  <input type="password" name="password_confirm">
+                  <?php echo ((isset($_GET["pwdconf"])&&!empty($_GET["pwdconf"]))? "passwords do not match":"") ?>
+                </td>
+              </tr>
+              <tr>
+                <tfoot>
+                  <a href="home.php">Back to login</a>
+                  <input type="submit" name="register" value="Registrera" class="button">
+                </tfoot>
+              </tr>
+          </tbody>
+      </table>
 </form>
