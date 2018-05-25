@@ -1,5 +1,5 @@
 body{
-  background-color: #b5a60b;
+  background-color: yellow;
 }
 h1{
   color: #500650;
@@ -47,4 +47,11 @@ form{
 #send.button
 {
   margin-left: 133px;
+}
+
+.errormessage
+{
+  font-size: 12px;
+  color: red;
+  font-variant: small-caps;
 }

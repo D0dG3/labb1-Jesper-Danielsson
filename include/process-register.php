@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -17,7 +16,7 @@ if ($conn->connect_error) {
 { // check username
     if (0 === preg_match("/\S+/",$_POST["username"]))
     {
-      (($errors == "&")? $errors = $errors."uname=1":$errors = $errors."&uname=1");
+      (($errors === "&")? $errors = $errors."uname=1":$errors = $errors."&uname=1");
     }//check password
     if (0 === preg_match("/\S+/",$_POST["password"]))
     {
@@ -35,8 +34,10 @@ if ($conn->connect_error) {
     {
       (($errors == "&")? $errors = $errors."userexists=1": $errors = $errors."&userexists=1");
     }
+    echo $errors;
+    echo "hello";
     //check no errors occured
-    if ($errors == "&")
+    if ($errors == "")
     {
       $uname = mysqli_real_escape_string($conn,$_POST["username"]);
       $email = mysqli_real_escape_string($conn,$_POST["email"]);
@@ -49,8 +50,8 @@ if ($conn->connect_error) {
 
       $unique_salt = unique_salt();
       $hash = sha1($unique_salt . $password);
-
       $query = "INSERT INTO user (User_Name,User_Email,User_Password, User_Salt) VALUES ('$uname','$email','$hash','$unique_salt')";
+      echo "hola";
       $result = mysqli_query($conn,$query);
       header("Location: ../home.php");
     }else{
