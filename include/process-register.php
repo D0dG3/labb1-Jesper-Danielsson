@@ -13,7 +13,11 @@ if ($conn->connect_error) {
 }
 
   if (isset($_POST)&&!empty($_POST))
-{ // check username
+{
+    $sql = "SELECT `User_Email` FROM `user` WHERE `User_Email` = '".$_POST["email"]."'";
+    $select = mysqli_query($conn, $sql);
+    $tester = mysqli_fetch_array($select,MYSQL_ASSOC);
+  // check username
     if (0 === preg_match("/\S+/",$_POST["username"]))
     {
       (($errors === "&")? $errors = $errors."uname=1":$errors = $errors."&uname=1");
@@ -30,12 +34,10 @@ if ($conn->connect_error) {
     {
       (($errors == "&")? $errors = $errors."pwdconf=1":$errors = $errors."&pwdconf=1");
     }
-    if (0 !== preg_match("/ʌDuplicate.*email.*/i",mysqli_error($conn)))
+    if(in_array($_POST["email"], $tester))
     {
       (($errors == "&")? $errors = $errors."userexists=1": $errors = $errors."&userexists=1");
     }
-    echo $errors;
-    echo "hello";
     //check no errors occured
     if ($errors == "")
     {
@@ -51,10 +53,11 @@ if ($conn->connect_error) {
       $unique_salt = unique_salt();
       $hash = sha1($unique_salt . $password);
       $query = "INSERT INTO user (User_Name,User_Email,User_Password, User_Salt) VALUES ('$uname','$email','$hash','$unique_salt')";
-      echo "hola";
       $result = mysqli_query($conn,$query);
       header("Location: ../home.php");
-    }else{
+    }
+    else
+    {
       header("Location: ../home.php?reg=1".(($errors=="&")?"":$errors));
     }
   }

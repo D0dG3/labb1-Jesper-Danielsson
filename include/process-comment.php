@@ -17,7 +17,8 @@ if (isset($_SESSION)&&!empty($_SESSION))
 {
   if (empty($_POST['comment']))
    {
-    $errors[0]="";
+    (($errors === "&")? $errors = $errors."comment=1":$errors = $errors."&comment=1");
+    header("Location: ../home.php?".(($errors=="&")?"":$errors));
   }
   else {
     $user_id = mysqli_real_escape_string($conn,$_SESSION['User_ID']);

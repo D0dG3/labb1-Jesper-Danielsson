@@ -21,35 +21,28 @@ $hash = sha1($result['User_Salt'].$password);
 
 $sql = "SELECT * FROM user WHERE User_Name='$uname' AND User_Password = '$hash'";
 $result = $conn->query($sql);
-$compare = $result-> fetch_assoc();
+$compare = mysqli_fetch_array($result);
 
   if ($result->num_rows > 0)
-  { if ($row = $result-> fetch_assoc())
-    {
-      while ($row = $result-> fetch_assoc())
+  {
+    $row = $result -> fetch_assoc();
+    foreach ($result as $row)
       {
         $_SESSION["User_ID"] = $row["User_ID"];
         $_SESSION["User_Name"] = $row["User_Name"];
         $_SESSION["User_Password"] = $row["User_Password"];
       }
-    }
-  else
-  {
-    if (isset($_POST)&&!empty($_POST))
-    { echo "isset";
-      if (0 === preg_match("/\S+/",$_POST["username"]))
+      header("Location: ../home.php");
+  }
+  else if (isset($_POST["username"]))
+    {
+      if ($uname != $compare["User_Name"])
       {
         (($errors == "?")? $errors = $errors."unamemtch=1":$errors = $errors."&unamemtch=1");
       } //check password
-      if (0 !== strcmp(($_POST["password"]), ($compare["User_Password"])))
+      if ($hash != $compare["User_Password"])
       {
         (($errors == "?")? $errors = $errors."pwdmtch=1":$errors = $errors."&pwdmtch=1");
       }
-      if($errors == "")
-      {
-        header("Location: ../home.php");
-      }
+        header("Location: ../home.php?".(($errors=="&")?"":$errors));
     }
-  }
-}
-  header("Location: ../home.php?".(($errors=="?")?"":$errors));

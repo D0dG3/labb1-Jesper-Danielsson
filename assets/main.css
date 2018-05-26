@@ -1,57 +1,80 @@
-body{
-  background-color: yellow;
+:root
+{
+  /* Color scheme */
+  --site-primary-color: yellow;
+  --site-secondary-color: black;
+  --form-primary-color: lightgrey;
+  --form-secondary-color: purple;
+  --form-text-color: black;
+  --error-text-color: red;
+  --btn-primary-color: pink;
+  --btn-secondary-color: grey;
 }
-h1{
-  color: #500650;
+
+
+body{
+  color: var(--site-secondary-color);
+  text-align: center;
+  background-color: var(--site-primary-color);
+  padding: 0px 3px;
+  box-sizing: border-box;
+  display: inline-block;
 }
 form{
-  margin-left: 30%;
-  background-color: #d2cccc;
-  background-position: center;
-  border:3px solid #771488;
-  border-radius: 4px;
-  margin-bottom: 7px;
-  width: 400px;
-  color: #500650;
-  font-size: 21px;
+  background-color: var(--form-primary-color);
+  border:4px solid;
+  border-color: var(--form-secondary-color);
+  border-radius: 30px;
+  margin-bottom: 10px;
+  width: 349px;
+  color: var(--form-text-color);
+  font-size: 18px;
+  text-align: right;
+  float: left;
 }
-.name{
-  border: 1px solid black;
-  width: 90%;
-}
-
-.email{
-  border: 1px solid black;
-  width: 93%;
-}
-
-.status{
-  border-radius: 10px;
-  resize:none;
-  height: 96px;
-  width: 200px;
-}
-#status
+h1
 {
-  width: 170px;
-  height: 80px;
-  resize: none;
+  font-size: 30px;
+  margin: 0px 0px 0px 0px;
 }
-
-.send{
-  background-color: grey;
-  color: black;
-  margin-left: 400px;
-  margin-top: 10px;
-}
-#send.button
+.button
 {
-  margin-left: 133px;
+  margin: 3px 25px 3px 5px;
+  text-decoration: none;
+  color: var(--form-text-color);
+  border: solid 2px;
+  border-Color: var(--btn-secondary-color);
+  background-color: var(--btn-primary-color);
+  height: 23px;
 }
+.link
+{
+  font-size: 17px;
+  margin: 3px 25px 3px 5px;
+  text-decoration: none;
+  color: var(--form-text-color);
+  border: solid 2px;
+  border-Color: var(--btn-secondary-color);
+  background-color: var(--btn-primary-color);
+  height: 23px;
 
+}
 .errormessage
 {
-  font-size: 12px;
-  color: red;
+  font-size: 10px;
+  color: var(--error-text-color);
   font-variant: small-caps;
+  text-align: justify;
+  float: right;
+}
+.comment
+{
+  float: right;
+}
+.img
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
 }
