@@ -16,11 +16,13 @@ $query = "SELECT * FROM comment LEFT JOIN user ON comment.User_ID = user.User_ID
 $result = mysqli_query($conn,$query);
 while ($comment = mysqli_fetch_assoc($result))
 {?>
-<form class="comment">
-  <tr>
-    <td><?php echo $comment['User_Name']; ?></td> <br>
-    <td><?php echo $comment['Comment']; ?></td> <br>
-    <td><?php echo $comment['Timestamp']; ?></td> <br>
-  </tr>
-</form>
+<div class="commenting-div">
+  <form class="comment">
+    <tr>
+      <td><?php echo $comment['User_Name']; ?></td> <br>
+      <td><?php echo $comment['Comment']; ?></td> <br>
+      <td><?php echo $comment['Timestamp']; ?></td> <br>
+    </tr>
+  </form>
+</div>
 <?php } ?>

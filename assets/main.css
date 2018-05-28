@@ -10,8 +10,6 @@
   --btn-primary-color: pink;
   --btn-secondary-color: grey;
 }
-
-
 body{
   color: var(--site-secondary-color);
   text-align: center;
@@ -77,4 +75,8 @@ h1
   margin-left: auto;
   margin-right: auto;
   width: 10%;
+}
+.commenting-div
+{
+  display: block;
 }
